@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {useNavigation} from '@react-navigation/native'
-
+import { useNavigation } from "@react-navigation/native";
 
 import {
   Background,
@@ -18,8 +17,8 @@ import {
 
 export default function SignIn() {
   const navigation = useNavigation();
-
   const [email, setEmail] = useState("");
+  const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
 
   return (
@@ -28,8 +27,21 @@ export default function SignIn() {
         <Logo source={require("../../assets/Logo2.png")} />
 
         <Text>
-          <Text>Bem Vindo!{"\n"}Acesse sua conta para começar a{"\n"}controlar sua grana</Text>
+          <Text>
+            Crie sua conta!{"\n"}começe controlar sua grana{"\n"}da melhor
+            forma!
+          </Text>
         </Text>
+
+        <AreaInput>
+          <Input
+            placeholder="Nome"
+            autoCorrect={false}
+            autoCapitalize="none"
+            value={nome}
+            onChangeText={(text) => setNome(text)}
+          />
+        </AreaInput>
 
         <AreaInput>
           <Input
@@ -52,11 +64,11 @@ export default function SignIn() {
         </AreaInput>
 
         <SubmitButton>
-          <SubmitText>Acessar</SubmitText>
+          <SubmitText>Cadastrar</SubmitText>
         </SubmitButton>
 
-        <Link onPress={() => navigation.navigate('SignUp')}>
-          <LinkText>Criar conta</LinkText>
+        <Link onPress={() => navigation.navigate("SignIn")}>
+          <LinkText>Já tenho uma conta</LinkText>
         </Link>
       </Container>
     </Background>
