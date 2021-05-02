@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import {useNavigation} from '@react-navigation/native'
+import React, { useState ,useContext} from "react";
+import { useNavigation } from '@react-navigation/native'
+import { AuthContext } from '../../contexts/auth';
 
 
 import {
@@ -21,6 +21,11 @@ export default function SignIn() {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const { user } = useContext(AuthContext);
+
+  function handleLogin(){
+    console.log(user.nome);
+  }
 
   return (
     <Background>
@@ -51,7 +56,7 @@ export default function SignIn() {
           />
         </AreaInput>
 
-        <SubmitButton>
+        <SubmitButton onPress={handleLogin}>
           <SubmitText>Acessar</SubmitText>
         </SubmitButton>
 
