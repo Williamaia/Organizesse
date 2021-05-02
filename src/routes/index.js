@@ -7,7 +7,7 @@ import AppRouts from './app.routes';
 function Routes(){
     const { signed } = useContext(AuthContext);
     return(
-       signed ? <AppRouts/> : <AuthRouts/>
+        signed ? <AppRouts/> : <AuthRouts/>
     )
 }
 

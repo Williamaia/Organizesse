@@ -4,14 +4,15 @@ import 'firebase/database';
 
 // Criando as configurações do projeto
 let firebaseConfig = {
-    apiKey: "AIzaSyA-qAFAEZtK-jqxenMsaY9j3ZG94WD3t7I",
-    authDomain: "organizessefb.firebaseapp.com",
-    projectId: "organizessefb",
-    storageBucket: "organizessefb.appspot.com",
-    messagingSenderId: "475513780742",
-    appId: "1:475513780742:web:e8d993222f8922274e2187",
-    measurementId: "G-HZFBL0387K"
-  };
+  apiKey: "AIzaSyABs9IH0oZ1todKqrowIOJ5lRS8uHF0W-Q",
+  authDomain: "organizesse-5daf5.firebaseapp.com",
+  databaseURL: "https://organizesse-5daf5-default-rtdb.firebaseio.com",
+  projectId: "organizesse-5daf5",
+  storageBucket: "organizesse-5daf5.appspot.com",
+  messagingSenderId: "109794335308",
+  appId: "1:109794335308:web:db3a50e951ac0d556b32e9",
+  measurementId: "G-GCN225QNG0"
+};
 
   // Se (firebase == 0) não tem firebase criado, abre a conexão
   // Se (firebase > 0) pula o if para não abrir duas conexões
