@@ -4,10 +4,12 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }){
     const [user, setUser] = useState({
-        nome: 'William'
+        nome: 'William',
+        id: '12345'
     });
     return(
-        <AuthContext.Provider value={{ user }}>
+                                    //converter objeto para boolean
+        <AuthContext.Provider value={{signed: !!user,  user }}>
             {children}
         </AuthContext.Provider>
     );

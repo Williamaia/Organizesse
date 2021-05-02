@@ -21,10 +21,10 @@ export default function SignIn() {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { user } = useContext(AuthContext);
+
 
   function handleLogin(){
-    console.log(user.nome);
+
   }
 
   return (
