@@ -12,21 +12,22 @@ function AuthProvider({ children }) {
       .auth()
       .createUserWithEmailAndPassword(email, senha)
       .then(async (value) => {
-        let id = value.user.id;
+        let uid = value.user.uid;
         await firebase
           .database()
           .ref('users')
-          .child(id)
+          .child(uid)
           .set({
             saldo: 0,
             nome: nome,
           })
           .then(() => {
             let data = {
-              id: id,
+              uid: uid,
               nome: nome,
               email: value.user.email,
             };
+            console.log(data);
             setUser(data);
           });
       });
