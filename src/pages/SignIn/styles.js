@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Background = styled.View`
     flex:1;
-    background-color: #131313;
+    background-color: #fff;
 `;
 
 export const Container = styled.KeyboardAvoidingView`
@@ -24,12 +24,12 @@ export const AreaInput = styled.View`
 `;
 
 export const Input = styled.TextInput.attrs({
-    placeholderTextColor: 'rgba(255, 255, 255, 0.20)'
+    placeholderTextColor: 'rgba(0, 0, 0, 0.20)'
 })`
-    background: rgba(0, 0, 0, 0.20);
+    background: rgba(255, 255, 255, 20);
     width: 98%;
     font-size: 17px;
-    color: #fff;
+    color: #131313;
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 7px;
@@ -58,14 +58,25 @@ export const Link = styled.TouchableOpacity`
 export const LinkText = styled.Text`
     font-size: 15px;
     margin-top: 15px;
-    color: #fff;
+    color: #131313;
 `;
 
 export const Text = styled.Text`
-    margin-bottom: 14px;
-    text-align: center;
     font-size: 15px;
-    color: #fff;
+    color: #131313;
+`;
+
+
+export const Title = styled.Text`
+    font-size: 25px;
+    color: #131313;
+    font-weight: bold;
+`;
+
+export const AreaText = styled.View`
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
 `;
 
 

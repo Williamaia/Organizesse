@@ -15,6 +15,8 @@ import {
   Link,
   LinkText,
   Text,
+  AreaText, 
+  Title,
 } from "./styles";
 
 export default function SignIn() {
@@ -35,12 +37,11 @@ export default function SignIn() {
       <Container>
         <Logo source={require("../../assets/Logo2.png")} />
 
-        <Text>
-          <Text>
-            Crie sua conta!{"\n"}começe controlar sua grana{"\n"}da melhor
-            forma!
-          </Text>
-        </Text>
+        <AreaText>
+          <Title> Crie sua conta!</Title>
+          <Text>começe controlar sua grana</Text>
+          <Text>da melhor forma :D</Text>
+        </AreaText>
 
         <AreaInput>
           <Input

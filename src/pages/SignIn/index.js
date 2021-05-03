@@ -14,6 +14,8 @@ import {
   Link,
   LinkText,
   Text,
+  AreaText,
+  Title,
 } from "./styles";
 
 export default function SignIn() {
@@ -22,9 +24,11 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  const { signIn } = useContext(AuthContext);
+
 
   function handleLogin(){
-
+    signIn(email, senha);
   }
 
   return (
@@ -32,9 +36,11 @@ export default function SignIn() {
       <Container>
         <Logo source={require("../../assets/Logo2.png")} />
 
-        <Text>
-          <Text>Bem Vindo!{"\n"}Acesse sua conta para começar a{"\n"}controlar sua grana</Text>
-        </Text>
+        <AreaText>
+          <Title>Bem Vindo!</Title>
+          <Text>Acesse sua conta para começar a</Text>
+          <Text>controlar sua grana</Text>
+        </AreaText>
 
         <AreaInput>
           <Input
@@ -52,6 +58,7 @@ export default function SignIn() {
             autoCorrect={false}
             autoCapitalize="none"
             value={senha}
+            secureTextEntry
             onChangeText={(text) => setSenha(text)}
           />
         </AreaInput>
