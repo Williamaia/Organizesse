@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import CheckBox from "@react-native-community/checkbox";
 import { useNavigation } from "@react-navigation/native";
 
-import {AuthContext} from '../../contexts/auth';
+import { AuthContext } from "../../contexts/auth";
 
 import {
   Background,
@@ -15,7 +15,7 @@ import {
   Link,
   LinkText,
   Text,
-  AreaText, 
+  AreaText,
   Title,
 } from "./styles";
 
@@ -26,9 +26,11 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   const { signUp } = useContext(AuthContext);
 
-  function handleSignUp(){
+  function handleSignUp() {
     signUp(email, senha, nome);
   }
 
@@ -73,7 +75,13 @@ export default function SignIn() {
           />
         </AreaInput>
 
-        <SubmitButton onPress = {handleSignUp}>
+        {/* <CheckBox 
+          disabled={false}
+          value={toggleCheckBox}
+          onValueChange={(newValue) => setToggleCheckBox(newValue)}
+        /> */}
+
+        <SubmitButton onPress={handleSignUp}>
           <SubmitText>Cadastrar</SubmitText>
         </SubmitButton>
 
