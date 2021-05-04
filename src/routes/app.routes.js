@@ -1,20 +1,39 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Home from '../pages/Home';
+import New from '../pages/New';
+import Profile from '../pages/Profile';
 
 // Criando a stack
-const HomeStack = createStackNavigator();
+const AppDrawer = createDrawerNavigator();
 
 // Criando compontente para telas
-function HomeRoutes(){
+function AppRoutes(){
     return(
-        <HomeStack.Navigator>
-            <HomeStack.Screen name="Home" component={Home}></HomeStack.Screen>
-        </HomeStack.Navigator>
+        <AppDrawer.Navigator drawerStyle={{
+            backgroundColor: '#FFF'
+        }}
+        drawerContentOptions={{
+            labelStyle:{
+                fontWeight: 'bold'
+            }, 
+            activeTintColor: '#131313',
+            activeBackgroundColor: '#00b94a',
+            inactiveBackgroundColor: '#FFF',
+            inactiveTintColor: '#131313',
+            itemStyle: {
+                marginVertical: 5,
+            }
+        }}
+        >
+            <AppDrawer.Screen name="Home" component={Home}/>
+            <AppDrawer.Screen name="Novo" component={New}/>
+            <AppDrawer.Screen name="Perfil" component={Profile}/>
+        </AppDrawer.Navigator>
     );
 }
 
-export default HomeRoutes;
+export default AppRoutes;
 
 

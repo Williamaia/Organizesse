@@ -22,11 +22,11 @@ function AuthRoutes() {
         component={SignUp}
         options={{
             headerStyle:{
-                backgroundColor: '#131313',
+                backgroundColor: '#FFF',
                 borderBottomWidth: 1,
                 borderBottomColor: '#00b94a'
             },
-            headerTintColor: '#FFF',
+            headerTintColor: '#131313',
             headerBackTitleVisible: false,
             headerTitle: '',
             
