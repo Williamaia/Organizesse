@@ -4,6 +4,19 @@ export const Background = styled.View`
   flex: 1;
 `;
 
+export const ContainerLogo = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+export const Logo = styled.Image`
+  margin-top: 25px;
+  margin-bottom: 15px;
+  width: 100px;
+  height: 100px;
+`;
+
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: "rgba(0, 0, 0, 0.20)",
 })`
