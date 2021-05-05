@@ -33,7 +33,7 @@ export default function Home() {
         <Logo source={require("../../assets/Logo5.png")} />
       </ContainerLogo>
       <Container>
-        <Nome>William</Nome>
+        <Nome>{user && user.nome}</Nome>
         <Saldo>R$ 123,00</Saldo>
       </Container>
       <Title>Ultimas movimentações</Title>
