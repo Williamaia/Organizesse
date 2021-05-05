@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
+import HistoricoList from "../../components/HistoricoList";
 
 import { AuthContext } from "../../contexts/auth";
 
@@ -13,10 +14,17 @@ import {
   Title,
   Logo,
   ContainerLogo,
+  List,
 } from "./styles";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
+  const [historico, setHistorico] = useState([
+    {key: '1', tipo: 'Receita', valor: 1200},
+    {key: '2', tipo: 'Despesa', valor: 700},
+    {key: '1', tipo: 'Receita', valor: 1700},
+    {key: '2', tipo: 'Despesa', valor: 100}
+  ]);
 
   return (
     <Background>
@@ -29,6 +37,12 @@ export default function Home() {
         <Saldo>R$ 123,00</Saldo>
       </Container>
       <Title>Ultimas movimentações</Title>
+      <List
+        showsVerticalScrollIndicator={false}
+        data={historico}
+        keyExtator={item => item.key}
+        renderItem={({ item }) => (<HistoricoList data={item}/>)}
+      />
     </Background>
   );
 }

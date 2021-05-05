@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 export default function New(){
     return(
         <View>
-            <Header />
+            <Header /> 
             <Text>NEW</Text>
         </View>
     );

@@ -41,3 +41,18 @@ export const Title = styled.Text`
   color: #00b94a;
   margin-bottom: 10px;
 `;
+
+export const List = styled.FlatList.attrs({
+  marginHozirontal: 15
+})`
+  padding-top: 12px;
+  padding-bottom: 10px;
+  background-color: #c0c0c0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+`;
