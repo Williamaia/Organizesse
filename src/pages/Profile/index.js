@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Header } from '../../components/Header';
+import Header from '../../components/Header';
 
 import { AuthContext } from '../../contexts/auth';
 
@@ -23,8 +23,8 @@ export default function Profile() {
 
   return (
     <Container>
-      <Logo source={require("../../assets/Logo5.png")} />
       <Header/>
+      <Logo source={require("../../assets/Logo4.png")} />
       <Nome>
         <NomeText>Olá </NomeText>
         <NomeText style={{fontWeight: 'bold'}}>{user && user.nome}</NomeText>
