@@ -68,6 +68,7 @@ export default function SignIn() {
         <AreaInput>
           <Input
             placeholder="Senha"
+            secureTextEntry
             autoCorrect={false}
             autoCapitalize="none"
             value={senha}

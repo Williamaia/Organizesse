@@ -55,7 +55,7 @@ export default function New() {
   async function handleAdd() {
     let uid = usuario.uid;
 
-    let key = await firebase.database().ref("historico").child(uid).push().key;
+    let key = await firebase.database().ref('historico').child(uid).push().key;
 
     await firebase
       .database()
@@ -69,7 +69,7 @@ export default function New() {
       });
 
     //Atualizar saldo
-    let user = firebase.database().ref("users").child(uid);
+    let user = await firebase.database().ref("users").child(uid);
     await user.once('value').then((snapshot) => {
       let saldo = parseFloat(snapshot.val().saldo);
       tipo === 'Despesa' ? saldo -= parseFloat(valor) : saldo += parseFloat(valor);
@@ -99,8 +99,8 @@ export default function New() {
             onChangeText={(text) => setValor(text)}
           />
           <Picker onChange={setTipo} tipo={tipo} />
-          <SubmitButton>
-            <SubmitText onPress={handleSubmit}>Registrar</SubmitText>
+          <SubmitButton onPress={handleSubmit}>
+            <SubmitText>Registrar</SubmitText>
           </SubmitButton>
         </SafeAreaView>
       </Background>
