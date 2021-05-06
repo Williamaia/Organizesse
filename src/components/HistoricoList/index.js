@@ -10,7 +10,7 @@ const HistoricoList = ({ data }) => {
         <IconView>
           <Icon
             name={data.tipo === "Despesa" ? "arrow-down" : "arrow-up"}
-            color={data.tipo === "Despesa" ? "#049301" : "#ff0000"}
+            color={data.tipo === "Despesa" ? "#ff0000" : "#049301"}
             size={20}
           />
           <TipoText>{data.tipo}</TipoText>

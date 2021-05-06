@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import HistoricoList from "../../components/HistoricoList";
+import firebase from "../../services/firebaseConnection";
 
 import { AuthContext } from "../../contexts/auth";
 
@@ -18,13 +18,46 @@ import {
 } from "./styles";
 
 export default function Home() {
+  const [historico, setHistorico] = useState([]);
+  const [saldo, setSaldo] = useState(0);
+
   const { user } = useContext(AuthContext);
-  const [historico, setHistorico] = useState([
-    {key: '1', tipo: 'Receita', valor: 1200},
-    {key: '2', tipo: 'Despesa', valor: 700},
-    {key: '1', tipo: 'Receita', valor: 1700},
-    {key: '2', tipo: 'Despesa', valor: 100}
-  ]);
+  const uid = user && user.uid;
+
+  useEffect(() => {
+    async function loadList() {
+      await firebase
+        .database()
+        .ref('users')
+        .child(uid)
+        .on('value', (snapshot) => {
+          setSaldo(snapshot.val().saldo);
+        });
+
+      await firebase
+        .database()
+        .ref('historico')
+        .child(uid)
+        .orderByChild('data')
+        .equalTo(new Date())
+        .limitToLast(10)
+        .on('value', (snapshot) => {
+          setHistorico([]);
+
+          snapshot.foreach((childItem) => {
+            let list = {
+              key: childItem.key,
+              tipo: childItem.val().tipo,
+              valor: childItem.val().valor
+            };
+
+            setHistorico(oldArray => [...oldArray, list]);
+          });
+        });
+    }
+
+    loadList();
+  }, []);
 
   return (
     <Background>
@@ -34,14 +67,16 @@ export default function Home() {
       </ContainerLogo>
       <Container>
         <Nome>{user && user.nome}</Nome>
-        <Saldo>R$ 123,00</Saldo>
+        <Saldo>
+          R$ {saldo.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+        </Saldo>
       </Container>
       <Title>Ultimas movimentações</Title>
       <List
         showsVerticalScrollIndicator={false}
         data={historico}
-        keyExtator={item => item.key}
-        renderItem={({ item }) => (<HistoricoList data={item}/>)}
+        keyExtractor={(item) => item.key}
+        renderItem={({ item }) => <HistoricoList data={item} />}
       />
     </Background>
   );

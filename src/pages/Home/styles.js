@@ -27,6 +27,7 @@ export const Nome = styled.Text`
   font-size: 18px;
   color: #131313;
   font-style: italic;
+  font-weight: bold;
 `;
 
 export const Saldo = styled.Text`
@@ -40,6 +41,8 @@ export const Title = styled.Text`
   margin-left: 15px;
   color: #00b94a;
   margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 export const List = styled.FlatList.attrs({
