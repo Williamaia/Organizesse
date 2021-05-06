@@ -9,6 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native'; 
 import firebase from "../../services/firebaseConnection";
 import { AuthContext } from '../../contexts/auth';
+import {format} from 'date-fns';
 
 import Header from "../../components/Header";
 
@@ -64,7 +65,7 @@ export default function New() {
       .set({
         tipo: tipo,
         valor: parseFloat(valor),
-        data: new Date(),
+        data: format(new Date, 'dd/MM/yyyy')
       });
 
     //Atualizar saldo

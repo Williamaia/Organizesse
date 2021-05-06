@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import HistoricoList from "../../components/HistoricoList";
 import firebase from "../../services/firebaseConnection";
+import {format} from 'date-fns';
 
 import { AuthContext } from "../../contexts/auth";
 
@@ -26,32 +27,24 @@ export default function Home() {
 
   useEffect(() => {
     async function loadList() {
-      await firebase
-        .database()
-        .ref('users')
-        .child(uid)
-        .on('value', (snapshot) => {
+      await firebase.database().ref('users').child(uid).on('value', (snapshot) => {
           setSaldo(snapshot.val().saldo);
         });
 
-      await firebase
-        .database()
-        .ref('historico')
+      await firebase.database().ref('historico')
         .child(uid)
-        .orderByChild('data')
-        .equalTo(new Date())
-        .limitToLast(10)
-        .on('value', (snapshot) => {
+        .orderByChild('data').equalTo(format(new Date, 'dd/MM/yyyy'))
+        .limitToLast(10).on('value', (snapshot) => {
           setHistorico([]);
 
-          snapshot.foreach((childItem) => {
+          snapshot.forEach((childItem) => {
             let list = {
               key: childItem.key,
               tipo: childItem.val().tipo,
               valor: childItem.val().valor
             };
 
-            setHistorico(oldArray => [...oldArray, list]);
+            setHistorico(oldArray => [...oldArray, list].reverse());
           });
         });
     }
