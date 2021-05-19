@@ -7,7 +7,7 @@ import SignUp from "../pages/SignUp";
 // Criando a Home
 const AuthStack = createStackNavigator();
 
-// Criando compontente para telas
+// Criando compontente para telas de autenticação (Login e Cadastro)
 function AuthRoutes() {
   return (
     <AuthStack.Navigator>

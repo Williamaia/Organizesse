@@ -30,7 +30,7 @@ export default function New() {
   const { user: usuario } = useContext(AuthContext);
 
   function handleSubmit() {
-    //Verifica se e numero e não é nulo
+    // Verifica se e numero e não é nulo
     Keyboard.dismiss();
     if (isNaN(parseFloat(valor)) || tipo === null) {
       alert("Preencha todos os campos!");
@@ -52,11 +52,14 @@ export default function New() {
     );
   }
 
+  // Adicionar cadastro no banco 
   async function handleAdd() {
     let uid = usuario.uid;
 
+    // Criar uma key no firebase e seta na variavel
     let key = await firebase.database().ref('historico').child(uid).push().key;
 
+    // Setando valores ao registro
     await firebase
       .database()
       .ref("historico")
@@ -79,7 +82,6 @@ export default function New() {
     Keyboard.dismiss();
     setValor('');
     navigation.navigate('Início');
-
   }
 
   return (

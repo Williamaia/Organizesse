@@ -26,7 +26,7 @@ export default function SignIn() {
 
   const { signIn } = useContext(AuthContext);
 
-
+  // Logar user
   function handleLogin(){
     signIn(email, senha);
   }

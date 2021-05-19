@@ -10,11 +10,6 @@ import AuthProvider from "./src/contexts/auth";
 import Routes from "./src/routes/index";
 
 export default function Organizesse() {
-  // function pegaNome()
-  // {
-  //   firebase.database();
-  // }
-
   return (
     <NavigationContainer>
       <AuthProvider>

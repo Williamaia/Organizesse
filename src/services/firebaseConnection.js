@@ -14,8 +14,7 @@ let firebaseConfig = {
   measurementId: "G-GCN225QNG0"
 };
 
-  // Se (firebase == 0) não tem firebase criado, abre a conexão
-  // Se (firebase > 0) pula o if para não abrir duas conexões
+  // Verificar se tem uma instância
   if(!firebase.apps.length)
   {
     //Abrindo uma conexão

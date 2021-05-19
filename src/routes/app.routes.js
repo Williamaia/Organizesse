@@ -9,7 +9,7 @@ import Profile from "../pages/Profile";
 // Criando a stack
 const AppDrawer = createDrawerNavigator();
 
-// Criando compontente para telas
+// Criando compontente para telas de user autenticado
 function AppRoutes() {
   return (
     <AppDrawer.Navigator

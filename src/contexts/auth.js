@@ -51,7 +51,7 @@ function AuthProvider({ children }) {
       });
   }
 
-  //cadastrando usuario, then: função anonima
+  //cadastrando usuario
   async function signUp(email, senha, nome) {
     await firebase
       .auth()
@@ -82,10 +82,12 @@ function AuthProvider({ children }) {
       });
   }
 
+  // Gravar usuario logado no asyncStorage
   async function storageUser(data) {
     await AsyncStorage.setItem("Auth_user", JSON.stringify(data));
   }
 
+  // Sair
   async function signOut() {
     await firebase.auth().signOut();
     await AsyncStorage.clear()

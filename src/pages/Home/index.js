@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from 'react-native';
 import Header from "../../components/Header";
 import HistoricoList from "../../components/HistoricoList";
 import firebase from "../../services/firebaseConnection";
-import {format} from 'date-fns';
+import { format, isPast } from "date-fns";
 
 import { AuthContext } from "../../contexts/auth";
 
@@ -19,6 +20,7 @@ import {
 } from "./styles";
 
 export default function Home() {
+  // Estados dos componetes
   const [historico, setHistorico] = useState([]);
   const [saldo, setSaldo] = useState(0);
 
@@ -27,30 +29,84 @@ export default function Home() {
 
   useEffect(() => {
     async function loadList() {
-      await firebase.database().ref('users').child(uid).on('value', (snapshot) => {
+      // Pegar o saldo do usuario autenticado
+      await firebase
+        .database()
+        .ref("users")
+        .child(uid)
+        .on("value", (snapshot) => {
           setSaldo(snapshot.val().saldo);
         });
 
-      await firebase.database().ref('historico')
+      // Pegar os dados do banco (Historico)
+      await firebase
+        .database()
+        .ref("historico")
         .child(uid)
-        .orderByChild('data').equalTo(format(new Date, 'dd/MM/yyyy'))
-        .limitToLast(10).on('value', (snapshot) => {
+        .orderByChild("data")
+        .equalTo(format(new Date(), "dd/MM/yyyy"))
+        .limitToLast(10)
+        .on("value", (snapshot) => {
           setHistorico([]);
 
+          // Valores da consulta
           snapshot.forEach((childItem) => {
             let list = {
               key: childItem.key,
               tipo: childItem.val().tipo,
-              valor: childItem.val().valor
+              valor: childItem.val().valor,
             };
 
-            setHistorico(oldArray => [...oldArray, list].reverse());
+            // Pegar valores existente e invertir a ordem da listagem do histórico
+            setHistorico((oldArray) => [...oldArray, list].reverse());
           });
         });
     }
-
     loadList();
   }, []);
+
+  function handleDelete(data) {
+
+    if( isPast(new Date(data.data))) {
+      alert('Você não pode excluir um registro antigo');
+      return;
+    }
+
+    Alert.alert(
+      'Atenção',
+      `Deseja mesmo excluir essa movimentação? ${data.tipo} - ${data.valor}`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Confirmar",
+          onPress: () => handleDeleteSuccess(data),
+        },
+      ]
+    );
+  }
+
+  async function handleDeleteSuccess(data) {
+    await firebase
+      .database()
+      .ref("historico")
+      .child(uid)
+      .child(data.key)
+      .remove()
+      .then(async () => {
+        let saldoatual = saldo;
+        data.tipo === "Despesa"
+          ? (saldoatual += parseFloat(data.valor))
+          : (saldoatual -= parseFloat(data.valor));
+
+          await firebase.database().ref('users').child(uid).child('saldo').set(saldoatual);
+
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
     <Background>
@@ -69,7 +125,9 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         data={historico}
         keyExtractor={(item) => item.key}
-        renderItem={({ item }) => <HistoricoList data={item} />}
+        renderItem={({ item }) => (
+          <HistoricoList data={item} deleteItem={handleDelete} />
+        )}
       />
     </Background>
   );

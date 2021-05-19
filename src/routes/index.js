@@ -5,6 +5,7 @@ import AuthRouts from "./auth.routes";
 import AppRouts from "./app.routes";
 import { ActivityIndicator, View } from "react-native";
 
+// Juntando as rotas Auth e App
 function Routes() {
   const { signed, loading } = useContext(AuthContext);
 
@@ -16,6 +17,7 @@ function Routes() {
     );
   }
 
+  //Verifica se o usuário está logado
   return signed ? <AppRouts /> : <AuthRouts />;
 }
 
